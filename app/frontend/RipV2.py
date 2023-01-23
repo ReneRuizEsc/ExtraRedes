@@ -34,8 +34,9 @@ def RipR():
         "conf t",
         "router rip",
         "version 2",
-        "network 148.204.0.0",
+        "network 148.204.56.0",
         "network 8.0.0.0",
+        "no auto-summary",
         "end",
         "wr",
         "telnet 8.8.8.1",
@@ -45,8 +46,9 @@ def RipR():
         "conf t",
         "router rip",
         "version 2",
-        "network 148.204.0.0",
+        "network 148.204.59.0",
         "network 8.0.0.0",
+        "no auto-summary",
         "end",
         "wr",
         "telnet 8.8.8.6",
@@ -56,8 +58,9 @@ def RipR():
         "conf t",
         "router rip",
         "version 2",
-        "network 148.204.0.0",
+        "network 148.204.60.0",
         "network 8.0.0.0",
+        "no auto-summary",
         "end",
         "wr"
     ]
@@ -70,6 +73,8 @@ def RipR():
         output = DEVICE_ACCESS.recv(65000)
         print(output.decode())
     session.close()
+    
+    return "Rip en routers"
 
 #Borra config
 def BorraRip():
@@ -108,3 +113,4 @@ def BorraRip():
         print(output.decode())
     session.close()
     
+    return "Rip quitado"

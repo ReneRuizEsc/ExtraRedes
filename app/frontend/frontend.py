@@ -19,11 +19,11 @@ def routing_change():
     rout_status = request.form['routStatus']
     if rout_status == "OSPF Activado":
         print("OSPF")
-        RipR()
+        rout_status = RipR()
         
     if rout_status == "OSPF Desactivado":
         print("OSPF De")
-        BorraRip()
+        rout_status = BorraRip()
     return render_template('enrutamiento.html', rout_status=rout_status)
     
 @app.route("/find")
