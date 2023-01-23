@@ -1,0 +1,9 @@
+digraph My_Network {
+	MV -> R1
+	PC1 -> R2
+	PC2 -> R3
+	R1 -> R2
+	R2 -> R1
+	R2 -> R3
+	R3 -> R2
+}

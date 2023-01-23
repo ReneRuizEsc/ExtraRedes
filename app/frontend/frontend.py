@@ -1,9 +1,10 @@
 #!/bin/python3
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import requests
 from RipV2 import RipR, BorraRip
 from OSPF import ospfR, BorraOSPF
+from graphviz import Digraph, Source
 
 app = Flask(__name__)
 
@@ -37,7 +38,16 @@ def routing_change():
     
 @app.route("/find")
 def find():
-    #do something
+    my_graph = Digraph("My_Network")
+    my_graph.edge("MV", "R1")
+    my_graph.edge("PC1", "R2")
+    my_graph.edge("PC2", "R3")
+    my_graph.edge("R1", "R2")
+    my_graph.edge("R2", "R1")
+    my_graph.edge("R2", "R3")
+    my_graph.edge("R3", "R2")
+    my_graph.render('static/topologia')
+    #return send_file('templates/topologia.pdf')
     return render_template('topologia.html')
 
 if __name__ == "__main__":
