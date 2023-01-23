@@ -5,8 +5,15 @@
     </head>
     <body>
         <h1>Enrutamiento</h1>
-        <p><button type="button">Activar OSPF</button>   <button type="button">Activar RIP</button></p>
-        <p><button type="button">Desactivar OSPF</button>   <button type="button">Desactivar RIP</button></p>
+        <form action="{{ url_for('routing_change') }}" method="post">
+            <button type="submit" name="routStatus" value="OSPF Activado">Activar OSPF</button>
+            <button type="submit" name="routStatus" value="RIP Activado">Activar RIP</button>
+            <button type="submit" name="routStatus" value="OSPF Desactivado">Desactivar OSPF</button>
+            <button type="submit" name="routStatus" value="RIP Desactivado">Desactivar RIP</button></p>
+        <form>
+        {% if rout_status %}
+            <p><textarea id="status" name="status" rows="4" cols="50">{{ rout_status }}</textarea></p>
+        {% endif %}
         <p><a href="/">Volver</a>
     </body>
-</html> 
+</html>
