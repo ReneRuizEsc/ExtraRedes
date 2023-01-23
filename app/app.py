@@ -1,7 +1,9 @@
 #import smtplib
 import pexpect
-from decouple import config
+#from decouple import config
 from flask import Flask
+from funciona import correo
+from ExtraRedes.app.RipV2 import RipR1, RipR2, RipR3, conecta, pruebaPara
 
 datos = 'cisco'
 ipBusca = '148.204.56.1'
@@ -29,5 +31,6 @@ def pruebaTelnet():
 
 if __name__ == "__main__":
     #cosa = correo()
-    pruebaTelnet()
+    #pruebaTelnet()
+    pruebaPara()
     app.run(debug=True)
