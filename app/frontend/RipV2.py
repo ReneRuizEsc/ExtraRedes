@@ -1,4 +1,4 @@
-#Aqui van los cosos de paramiko
+#Aqui van los cosos de RIPv2
 import paramiko
 import time
 
@@ -25,6 +25,49 @@ def pruebaPara():
     print(stdout.read().decode())
     
     session.close()
+    
+def genRouter(ipE): #Con la ip de entrada y aquí debajo la cadena agrega más routers
+    session = conecta(ipE)
+    listaTelnet = ["8.8.8.1","8.8.8.6"]
+    comandosR1 =[
+        "show ip int brie",
+        "conf t",
+        "router rip",
+        "version 2",
+        "network 148.204.56.0",
+        "network 8.0.0.0",
+        "no auto-summary",
+        "end",
+        "wr"
+    ]
+    
+    for listaT in listaTelnet:
+        comandoT = [
+        "telnet {listaT}",
+        "cisco",
+        "cisco",
+        "show ip int brie",
+        "conf t",
+        "router rip",
+        "version 2",
+        "network 148.204.60.0",
+        "network 8.0.0.0",
+        "no auto-summary",
+        "end",
+        "wr"]
+        comandosR1.extend(comandoT)
+        
+    DEVICE_ACCESS = session.invoke_shell()
+    
+    for command in comandosR1:
+        DEVICE_ACCESS.send(f'{command}\n')
+        print("Comando enviado: " + command+ "\n")
+        time.sleep(.5)
+        output = DEVICE_ACCESS.recv(65000)
+        print(output.decode())
+    session.close()
+    
+    return "Rip en routers"
 
 #Pone RipV2 en R1
 def RipR():
